@@ -22,7 +22,7 @@ import { BLOG_POSTS } from '../../data/blog';
         {BLOG_POSTS.map((post) => (
           <article class="blog-card card">
             <div class="card__image">
-              <img src={`/images/blog/${post.slug}.svg`} alt={post.title} width="800" height="600" loading="lazy" class="blog-card__img" />
+              <img src={`${import.meta.env.BASE_URL}images/blog/${post.slug}.svg`} alt={post.title} width="800" height="600" loading="lazy" class="blog-card__img" />
             </div>
             <div class="card__body">
               <div class="blog-card__meta">

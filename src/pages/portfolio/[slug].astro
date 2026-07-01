@@ -51,14 +51,14 @@ const { project } = Astro.props;
     <div class="container container--narrow">
       <div class="project-gallery">
         <div class="project-gallery__main">
-          <img src={`/images/projects/${project.slug}-main.svg`} alt={project.title} width="800" height="600" loading="eager" class="project-gallery__img" />
+          <img src={`${import.meta.env.BASE_URL}images/projects/${project.slug}-main.svg`} alt={project.title} width="800" height="600" loading="eager" class="project-gallery__img" />
         </div>
         <div class="project-gallery__side">
           <div class="project-gallery__thumb">
-            <img src={`/images/projects/${project.slug}-before.svg`} alt="وضعیت قبل از بازسازی" width="400" height="300" loading="lazy" class="project-gallery__img" />
+            <img src={`${import.meta.env.BASE_URL}images/projects/${project.slug}-before.svg`} alt="وضعیت قبل از بازسازی" width="400" height="300" loading="lazy" class="project-gallery__img" />
           </div>
           <div class="project-gallery__thumb">
-            <img src={`/images/projects/${project.slug}-after.svg`} alt="نتیجه نهایی پس از بازسازی" width="400" height="300" loading="lazy" class="project-gallery__img" />
+            <img src={`${import.meta.env.BASE_URL}images/projects/${project.slug}-after.svg`} alt="نتیجه نهایی پس از بازسازی" width="400" height="300" loading="lazy" class="project-gallery__img" />
           </div>
         </div>
       </div>

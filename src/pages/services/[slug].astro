@@ -135,7 +135,7 @@ const relatedProjects = PROJECTS.filter((p) =>
           {relatedProjects.map((p) => (
             <article class="card">
               <div class="card__image">
-                <img src={`/images/projects/${p.slug}.svg`} alt={p.title} width="800" height="600" loading="lazy" class="project-card__img" />
+                <img src={`${import.meta.env.BASE_URL}images/projects/${p.slug}.svg`} alt={p.title} width="800" height="600" loading="lazy" class="project-card__img" />
               </div>
               <div class="card__body">
                 <h3><a href={`/portfolio/${p.slug}/`}>{p.title}</a></h3>
