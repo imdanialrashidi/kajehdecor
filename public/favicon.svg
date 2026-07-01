@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#B8956A"/>
-  <text x="32" y="44" font-family="sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">ک</text>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="4" fill="#B8956A"/>
+  <text x="16" y="24" text-anchor="middle" font-family="Vazirmatn, Tahoma, sans-serif" font-size="22" font-weight="800" fill="#FFF">ک</text>
 </svg>

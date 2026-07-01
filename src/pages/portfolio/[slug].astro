@@ -51,16 +51,14 @@ const { project } = Astro.props;
     <div class="container container--narrow">
       <div class="project-gallery">
         <div class="project-gallery__main">
-          <div class="project-gallery__placeholder">
-            <span>تصویر اصلی پروژه (قبل/بعد)</span>
-          </div>
+          <img src={`/images/projects/${project.slug}-main.svg`} alt={project.title} width="800" height="600" loading="eager" class="project-gallery__img" />
         </div>
         <div class="project-gallery__side">
-          <div class="project-gallery__placeholder project-gallery__placeholder--sm">
-            <span>تصویر قبل</span>
+          <div class="project-gallery__thumb">
+            <img src={`/images/projects/${project.slug}-before.svg`} alt="وضعیت قبل از بازسازی" width="400" height="300" loading="lazy" class="project-gallery__img" />
           </div>
-          <div class="project-gallery__placeholder project-gallery__placeholder--sm">
-            <span>تصویر بعد</span>
+          <div class="project-gallery__thumb">
+            <img src={`/images/projects/${project.slug}-after.svg`} alt="نتیجه نهایی پس از بازسازی" width="400" height="300" loading="lazy" class="project-gallery__img" />
           </div>
         </div>
       </div>
@@ -164,6 +162,18 @@ const { project } = Astro.props;
   }
   .project-gallery__placeholder--sm {
     min-height: 140px;
+  }
+
+  .project-gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: var(--radius-lg);
+  }
+  .project-gallery__thumb {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
 
   .project-section {

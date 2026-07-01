@@ -4,7 +4,7 @@ export const SITE = {
   tagline: 'طراحی و اجرای دکوراسیون داخلی',
   description:
     'کاژه دکور، متخصص طراحی و اجرای دکوراسیون داخلی، آشپزخانه، کابینت و بازسازی با طراحی سهبعدی و مشاوره تخصصی در تهران و کرج.',
-  url: 'https://kajehdecor.com',
+  url: 'https://imdanialrashidi.github.io/kajehdecor',
   // WhatsApp number in international format (no +)
   whatsappNumber: '989934202034',
   phone: '09934202034',
