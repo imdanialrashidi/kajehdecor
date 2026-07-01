@@ -1,0 +1,227 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PROJECTS, getProjectBySlug } from '../../data/projects';
+import { SITE } from '../../data/site';
+
+export function getStaticPaths() {
+  return PROJECTS.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<BaseLayout
+  title={project.metaTitle}
+  description={project.metaDesc}
+>
+  <script is:inline type="application/ld+json" slot="head">
+  {JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": project.title,
+    "description": project.challenge,
+    "locationCreated": project.location
+  })}
+  </script>
+
+  <section class="page-hero section section--alt">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="مسیر راهنما">
+        <ol>
+          <li><a href="/">خانه</a></li>
+          <li><a href="/portfolio/">نمونه‌کارها</a></li>
+          <li aria-current="page">{project.title}</li>
+        </ol>
+      </nav>
+      {project.isDemo && <span class="badge" style="margin-bottom:var(--space-4);display:inline-block;">محتوای نمونه / دمو</span>}
+      <h1>{project.title}</h1>
+      <div class="project-meta">
+        <span>📍 {project.location}</span>
+        <span>🏠 {project.type}</span>
+        <span>📐 {project.area}</span>
+        <span>🎨 {project.style}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="project-gallery">
+        <div class="project-gallery__main">
+          <div class="project-gallery__placeholder">
+            <span>تصویر اصلی پروژه (قبل/بعد)</span>
+          </div>
+        </div>
+        <div class="project-gallery__side">
+          <div class="project-gallery__placeholder project-gallery__placeholder--sm">
+            <span>تصویر قبل</span>
+          </div>
+          <div class="project-gallery__placeholder project-gallery__placeholder--sm">
+            <span>تصویر بعد</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-section">
+        <h2>چالش پروژه</h2>
+        <p>{project.challenge}</p>
+      </div>
+
+      <div class="project-section">
+        <h2>راه‌حل طراحی</h2>
+        <p>{project.solution}</p>
+      </div>
+
+      <div class="project-section">
+        <h2>متریال و رنگ‌های استفاده شده</h2>
+        <div class="materials-grid">
+          {project.materials.map((m) => (
+            <div class="material-chip">{m}</div>
+          ))}
+        </div>
+      </div>
+
+      <div class="project-section">
+        <h2>خدمات ارائه شده</h2>
+        <div class="services-tags">
+          {project.services.map((s) => <span class="tag">{s}</span>)}
+        </div>
+      </div>
+
+      {project.testimonial && (
+        <blockquote class="project-testimonial">
+          <p>❝ {project.testimonial.quote}</p>
+          <cite>— {project.testimonial.name}</cite>
+        </blockquote>
+      )}
+    </div>
+  </section>
+
+  <section class="section section--dark text-center">
+    <div class="container">
+      <h2 style="color:var(--color-gold);margin-bottom:var(--space-4);">پروژه مشابهی در ذهن دارید؟</h2>
+      <p style="color:var(--color-sand);max-width:50ch;margin-inline:auto;margin-bottom:var(--space-6);">
+        برای مشاوره رایگان و برآورد هزینه پروژه خود با ما تماس بگیرید.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-4);">
+        <a href="/consultation/" class="btn btn--primary btn--lg">دریافت مشاوره رایگان</a>
+        <a href={SITE.social.whatsapp} class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener noreferrer">واتساپ</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .breadcrumb ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    padding: 0;
+  }
+  .breadcrumb li:not(:last-child)::after { content: ' / '; margin-right: var(--space-2); }
+  .breadcrumb a { color: var(--color-accent); }
+
+  .page-hero h1 { margin-bottom: var(--space-4); }
+
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .project-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-10);
+  }
+  @media (max-width: 767px) {
+    .project-gallery { grid-template-columns: 1fr; }
+  }
+  .project-gallery__side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .project-gallery__placeholder {
+    background: linear-gradient(135deg, var(--color-beige), var(--color-stone));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    color: var(--color-wood);
+    min-height: 300px;
+  }
+  .project-gallery__placeholder--sm {
+    min-height: 140px;
+  }
+
+  .project-section {
+    margin-bottom: var(--space-10);
+  }
+  .project-section h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-4);
+  }
+  .project-section p {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-light);
+  }
+
+  .materials-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .material-chip {
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+  }
+
+  .services-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .tag {
+    font-size: var(--text-xs);
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-warm-white);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+  }
+
+  .project-testimonial {
+    background: var(--color-bg-alt);
+    border-right: 4px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    margin-top: var(--space-8);
+  }
+  .project-testimonial p {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+    font-style: italic;
+  }
+  .project-testimonial cite {
+    font-style: normal;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+  }
+</style>

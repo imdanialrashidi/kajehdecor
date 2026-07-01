@@ -1,0 +1,113 @@
+---
+const spaces = [
+  { icon: '🍳', label: 'آشپزخانه و کابینت', value: 'kitchen' },
+  { icon: '🛋', label: 'پذیرایی و نشیمن', value: 'living' },
+  { icon: '🛏', label: 'اتاق خواب', value: 'bedroom' },
+  { icon: '💼', label: 'دفتر کار', value: 'office' },
+  { icon: '🏪', label: 'فضای تجاری', value: 'commercial' },
+  { icon: '🔨', label: 'بازسازی کامل', value: 'renovation' },
+];
+---
+
+<section class="space-selector section" id="space-selector">
+  <div class="container">
+    <div class="section__header">
+      <h2>برای شروع، فضای موردنظرتان را انتخاب کنید</h2>
+      <p class="section__subtitle">فضایی که می‌خواهید طراحی یا بازسازی شود انتخاب کنید تا پیشنهاد اولیه دریافت کنید.</p>
+    </div>
+
+    <div class="space-selector__grid">
+      {spaces.map((space) => (
+        <button
+          class="space-selector__card"
+          data-space={space.value}
+          aria-pressed="false"
+        >
+          <span class="space-selector__icon" aria-hidden="true">{space.icon}</span>
+          <span class="space-selector__label">{space.label}</span>
+        </button>
+      ))}
+    </div>
+
+    <div class="space-selector__cta">
+      <a href="/quiz/" class="btn btn--primary">
+        دریافت پیشنهاد اولیه
+      </a>
+      <p class="space-selector__hint text-muted">یا مستقیماً <a href="/consultation/">فرم مشاوره</a> را پر کنید</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .space-selector__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  .space-selector__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-6) var(--space-4);
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+    font-family: inherit;
+  }
+
+  .space-selector__card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .space-selector__card[aria-pressed="true"] {
+    border-color: var(--color-accent);
+    background: var(--color-warm-white);
+    box-shadow: 0 0 0 3px rgba(184, 149, 106, 0.15);
+  }
+
+  .space-selector__icon {
+    font-size: var(--text-4xl);
+  }
+
+  .space-selector__label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  .space-selector__cta {
+    text-align: center;
+  }
+
+  .space-selector__hint {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+  }
+</style>
+
+<script is:inline>
+  document.querySelectorAll('.space-selector__card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const wasPressed = card.getAttribute('aria-pressed') === 'true';
+      document.querySelectorAll('.space-selector__card').forEach((c) =>
+        c.setAttribute('aria-pressed', 'false')
+      );
+      card.setAttribute('aria-pressed', String(!wasPressed));
+
+      // Update quiz link with selection
+      const space = card.dataset.space;
+      const quizLink = document.querySelector('.space-selector__cta .btn');
+      if (quizLink && space) {
+        quizLink.href = `/quiz/?space=${space}`;
+      }
+    });
+  });
+</script>

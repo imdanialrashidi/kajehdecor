@@ -1,0 +1,135 @@
+---
+import { PACKAGES } from '../data/packages';
+---
+
+<section class="packages section section--alt" id="packages">
+  <div class="container">
+    <div class="section__header">
+      <h2>پکیج‌های خدماتی</h2>
+      <p class="section__subtitle">پکیج مناسب پروژه‌تان را انتخاب کنید و برآورد هزینه بگیرید.</p>
+    </div>
+
+    <div class="packages__grid">
+      {PACKAGES.map((pkg, i) => (
+        <div class={`packages__card card ${pkg.highlighted ? 'packages__card--highlighted' : ''} fade-in`} style={`animation-delay: ${i * 100}ms`}>
+          {pkg.highlighted && (
+            <div class="packages__badge">پرطرفدار</div>
+          )}
+          <div class="card__body">
+            <h3 class="packages__name">{pkg.name}</h3>
+            <p class="packages__suitable">{pkg.suitableFor}</p>
+            <ul class="packages__list">
+              {pkg.deliverables.map((d) => (
+                <li>
+                  <span class="packages__check" aria-hidden="true">✓</span>
+                  {d}
+                </li>
+              ))}
+            </ul>
+            <div class="packages__process">
+              <span class="packages__process-label">زمان تقریبی:</span>
+              <span class="packages__process-value">{pkg.process}</span>
+            </div>
+            <a href="/consultation/" class={`btn ${pkg.highlighted ? 'btn--primary' : 'btn--secondary'} btn--full`}>
+              {pkg.cta}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <p class="packages__note text-center text-muted">
+      هزینه نهایی بر اساس متراژ، متریال، سطح طراحی و جزئیات اجرا مشخص می‌شود.
+    </p>
+  </div>
+</section>
+
+<style>
+  .packages__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  .packages__card {
+    position: relative;
+  }
+
+  .packages__card--highlighted {
+    border: 2px solid var(--color-accent);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .packages__badge {
+    position: absolute;
+    top: calc(-1 * var(--space-3));
+    right: var(--space-6);
+    background: var(--color-accent);
+    color: #fff;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    padding: var(--space-1) var(--space-4);
+    border-radius: var(--radius-full);
+  }
+
+  .packages__name {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    margin-bottom: var(--space-3);
+    color: var(--color-accent);
+  }
+
+  .packages__suitable {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-5);
+    line-height: var(--leading-relaxed);
+  }
+
+  .packages__list {
+    list-style: none;
+    margin-bottom: var(--space-5);
+  }
+
+  .packages__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-light);
+  }
+
+  .packages__check {
+    color: var(--color-success);
+    font-weight: var(--weight-bold);
+    flex-shrink: 0;
+  }
+
+  .packages__process {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-warm-white);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  .packages__process-label {
+    color: var(--color-text-muted);
+  }
+
+  .packages__process-value {
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+  }
+
+  .packages__note {
+    font-size: var(--text-sm);
+    max-width: 60ch;
+    margin-inline: auto;
+  }
+</style>

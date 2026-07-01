@@ -1,0 +1,98 @@
+---
+import { TESTIMONIALS } from '../data/testimonials';
+---
+
+<section class="testimonials section" id="testimonials">
+  <div class="container">
+    <div class="section__header">
+      <h2>نظرات مشتریان کاژه دکور</h2>
+      <p class="section__subtitle">آنچه مشتریان ما درباره تجربه همکاری‌شان می‌گویند.</p>
+    </div>
+
+    <div class="testimonials__grid">
+      {TESTIMONIALS.map((t, i) => (
+        <blockquote class="testimonials__card card fade-in" style={`animation-delay: ${i * 100}ms`}>
+          <div class="card__body">
+            <div class="testimonials__quote" aria-hidden="true">❝</div>
+            <p class="testimonials__text">{t.quote}</p>
+            <footer class="testimonials__footer">
+              <div class="testimonials__avatar" aria-hidden="true">
+                {t.name.charAt(0)}
+              </div>
+              <div>
+                <cite class="testimonials__name">{t.name}</cite>
+                <div class="testimonials__meta">
+                  {t.location} · {t.projectType}
+                </div>
+              </div>
+            </footer>
+          </div>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: var(--space-6);
+  }
+
+  .testimonials__card {
+    border: none;
+    text-align: center;
+  }
+
+  .testimonials__quote {
+    font-size: var(--text-5xl);
+    line-height: 1;
+    color: var(--color-stone);
+    margin-bottom: var(--space-2);
+  }
+
+  .testimonials__text {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-light);
+    margin-bottom: var(--space-6);
+    max-width: 40ch;
+    margin-inline: auto;
+  }
+
+  .testimonials__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .testimonials__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--weight-bold);
+    font-size: var(--text-lg);
+    flex-shrink: 0;
+  }
+
+  .testimonials__name {
+    font-style: normal;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    display: block;
+    text-align: right;
+  }
+
+  .testimonials__meta {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    text-align: right;
+  }
+</style>

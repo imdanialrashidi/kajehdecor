@@ -1,0 +1,192 @@
+---
+import { PROJECTS, PROJECT_CATEGORIES } from '../data/projects';
+---
+
+<section class="portfolio-preview section section--alt" id="portfolio">
+  <div class="container">
+    <div class="section__header">
+      <h2>نمونه‌کارهای کاژه دکور</h2>
+      <p class="section__subtitle">بخشی از پروژه‌های اجرا شده توسط تیم کاژه دکور را ببینید.</p>
+    </div>
+
+    <div class="portfolio-preview__filters" role="tablist" aria-label="فیتر پروژه‌ها">
+      {PROJECT_CATEGORIES.map((cat, i) => (
+        <button
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          class={`portfolio-preview__filter ${i === 0 ? 'portfolio-preview__filter--active' : ''}`}
+          data-filter={cat.key}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <div class="portfolio-preview__grid" role="tabpanel">
+      {PROJECTS.map((project) => (
+        <article class="project-card card" data-category={project.category}>
+          <div class="card__image">
+            <div class="project-card__placeholder" aria-hidden="true">
+              <span>تصویر پروژه</span>
+            </div>
+            {project.isDemo && (
+              <span class="project-card__demo-badge badge">نمونه دمو</span>
+            )}
+          </div>
+          <div class="card__body">
+            <div class="project-card__meta">
+              <span class="badge">{project.type}</span>
+              <span class="project-card__location">📍 {project.location}</span>
+            </div>
+            <h3 class="project-card__title">
+              <a href={`/portfolio/${project.slug}/`}>{project.title}</a>
+            </h3>
+            <div class="project-card__services">
+              {project.services.slice(0, 3).map((s) => (
+                <span class="project-card__service-tag">{s}</span>
+              ))}
+            </div>
+            <a href={`/portfolio/${project.slug}/`} class="btn btn--ghost btn--sm">
+              مشاهده جزئیات پروژه ←
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="portfolio-preview__cta text-center">
+      <a href="/portfolio/" class="btn btn--secondary">مشاهده همه نمونه‌کارها</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .portfolio-preview__filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .portfolio-preview__filter {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    font-family: inherit;
+    background: var(--color-bg-card);
+    border: 1.5px solid var(--color-border-light);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    color: var(--color-text-muted);
+  }
+
+  .portfolio-preview__filter:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .portfolio-preview__filter--active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+
+  .portfolio-preview__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-10);
+  }
+
+  .project-card__placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+    background: linear-gradient(135deg, var(--color-beige) 0%, var(--color-stone) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    color: var(--color-wood);
+  }
+
+  .project-card__demo-badge {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+  }
+
+  .project-card .card__image {
+    position: relative;
+  }
+
+  .project-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .project-card__location {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .project-card__title {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-3);
+  }
+
+  .project-card__title a {
+    color: var(--color-text);
+  }
+
+  .project-card__title a:hover {
+    color: var(--color-accent);
+  }
+
+  .project-card__services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-bottom: var(--space-4);
+  }
+
+  .project-card__service-tag {
+    font-size: var(--text-xs);
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-warm-white);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+  }
+
+  .portfolio-preview__cta {
+    padding-top: var(--space-4);
+  }
+</style>
+
+<script is:inline>
+  const filters = document.querySelectorAll('.portfolio-preview__filter');
+  const cards = document.querySelectorAll('.project-card');
+
+  filters.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filters.forEach((f) => {
+        f.classList.remove('portfolio-preview__filter--active');
+        f.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('portfolio-preview__filter--active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const filter = btn.dataset.filter;
+      cards.forEach((card) => {
+        const cat = card.dataset.category;
+        const show = filter === 'all' || cat === filter;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>

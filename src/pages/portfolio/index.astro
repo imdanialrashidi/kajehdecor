@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PROJECTS, PROJECT_CATEGORIES } from '../../data/projects';
+import { SITE } from '../../data/site';
+---
+
+<BaseLayout
+  title="نمونه‌کارهای کاژه دکور | پروژه‌های طراحی و اجرای دکوراسیون"
+  description="گالری پروژه‌های اجرا شده کاژه دکور: آشپزخانه، بازسازی، طراحی داخلی مسکونی، اداری و تجاری در تهران و کرج."
+>
+  <section class="page-hero section section--alt">
+    <div class="container">
+      <h1>نمونه‌کارهای کاژه دکور</h1>
+      <p class="page-hero__subtitle">
+        بخشی از پروژه‌های طراحی و اجرای دکوراسیون داخلی که توسط تیم {SITE.name} انجام شده است.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="portfolio-filters" role="tablist" aria-label="فیلتر پروژه‌ها">
+        {PROJECT_CATEGORIES.map((cat, i) => (
+          <button
+            role="tab"
+            aria-selected={i === 0 ? 'true' : 'false'}
+            class={`filter-btn ${i === 0 ? 'filter-btn--active' : ''}`}
+            data-filter={cat.key}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
+      <div class="portfolio-grid">
+        {PROJECTS.map((project) => (
+          <article class="project-card card" data-category={project.category}>
+            <div class="card__image">
+              <div class="project-card__placeholder" aria-hidden="true">
+                <span>تصویر پروژه</span>
+              </div>
+              {project.isDemo && <span class="demo-badge badge">نمونه دمو</span>}
+            </div>
+            <div class="card__body">
+              <div class="project-card__meta">
+                <span class="badge">{project.type}</span>
+                <span class="project-card__loc">📍 {project.location}</span>
+              </div>
+              <h2 class="project-card__title">
+                <a href={`/portfolio/${project.slug}/`}>{project.title}</a>
+              </h2>
+              <p class="project-card__desc">{project.challenge.slice(0, 100)}...</p>
+              <div class="project-card__tags">
+                {project.services.map((s) => <span class="tag">{s}</span>)}
+              </div>
+              <a href={`/portfolio/${project.slug}/`} class="btn btn--ghost btn--sm">
+                مشاهده جزئیات ←
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="portfolio-cta section--dark text-center" style="padding:var(--space-10);border-radius:var(--radius-lg);margin-top:var(--space-10);">
+        <h2 style="color:var(--color-gold);margin-bottom:var(--space-4);">پروژه مشابهی در ذهن دارید؟</h2>
+        <p style="color:var(--color-sand);max-width:50ch;margin-inline:auto;margin-bottom:var(--space-6);">
+          با ما تماس بگیرید تا مشاوره رایگان دریافت کنید و ببینید چطور می‌توانیم فضای شما را متحول کنیم.
+        </p>
+        <a href="/consultation/" class="btn btn--primary btn--lg">دریافت مشاوره رایگان</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero h1 { margin-bottom: var(--space-4); }
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  .portfolio-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+  .filter-btn {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    font-family: inherit;
+    background: var(--color-bg-card);
+    border: 1.5px solid var(--color-border-light);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    color: var(--color-text-muted);
+  }
+  .filter-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .filter-btn--active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: var(--space-6);
+  }
+
+  .project-card__placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    background: linear-gradient(135deg, var(--color-beige), var(--color-stone));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    color: var(--color-wood);
+  }
+  .demo-badge {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+  }
+  .card__image { position: relative; }
+
+  .project-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .project-card__loc {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+  .project-card__title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-2);
+  }
+  .project-card__title a { color: var(--color-text); }
+  .project-card__title a:hover { color: var(--color-accent); }
+  .project-card__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+  }
+  .project-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-bottom: var(--space-4);
+  }
+  .tag {
+    font-size: var(--text-xs);
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-warm-white);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+  }
+</style>
+
+<script is:inline>
+  document.querySelectorAll('.filter-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach((b) => {
+        b.classList.remove('filter-btn--active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('filter-btn--active');
+      btn.setAttribute('aria-selected', 'true');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach((card) => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>

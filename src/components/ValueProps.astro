@@ -1,0 +1,62 @@
+---
+const props = [
+  { icon: '🎨', title: 'طراحی سهبعدی قبل از تصمیم‌گیری', desc: 'قبل از هر اقدام اجرایی، طرح سهبعدی واقع‌گرایانه فضای آینده‌تان را ببینید.' },
+  { icon: '🤝', title: 'همراهی مشاور در طول پروژه', desc: 'از اولین مشاوره تا تحویل نهایی، یک مشاور متخصص در کنار شماست.' },
+  { icon: '💰', title: 'انتخاب متریال متناسب با بودجه', desc: 'بهترین متریال ممکن را با توجه به بودجه‌تان انتخاب می‌کنید.' },
+  { icon: '📋', title: 'اجرای منظم و مرحله‌به‌مرحله', desc: 'هر مرحله از اجرا شفاف، قابل پیگیری و با نظارت مستمر انجام می‌شود.' },
+  { icon: '🏢', title: 'تجربه پروژه‌های متنوع', desc: 'مسکونی، اداری، تجاری، ویلا و فضاهای مختلف — تجربه اجرای انواع پروژه.' },
+  { icon: '📱', title: 'ارتباط مستقیم با تیم طراحی', desc: 'ارتباط سریع و مستقیم با تیم طراحی و اجرا از طریق واتساپ و تماس.' },
+];
+---
+
+<section class="value-props section" id="value-props">
+  <div class="container">
+    <div class="section__header">
+      <h2>چرا کاژه دکور؟</h2>
+      <p class="section__subtitle">مزایای کار با تیم کاژه دکور برای پروژه طراحی و اجرای فضای شما.</p>
+    </div>
+
+    <div class="value-props__grid">
+      {props.map((p, i) => (
+        <div class="value-props__item fade-in" style={`animation-delay: ${i * 80}ms`}>
+          <span class="value-props__icon" aria-hidden="true">{p.icon}</span>
+          <h3 class="value-props__title">{p.title}</h3>
+          <p class="value-props__desc">{p.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .value-props__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: var(--space-8);
+  }
+
+  .value-props__item {
+    text-align: center;
+    padding: var(--space-6);
+  }
+
+  .value-props__icon {
+    font-size: var(--text-5xl);
+    display: block;
+    margin-bottom: var(--space-4);
+  }
+
+  .value-props__title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    margin-bottom: var(--space-2);
+  }
+
+  .value-props__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: 32ch;
+    margin-inline: auto;
+  }
+</style>

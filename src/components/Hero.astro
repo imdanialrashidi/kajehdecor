@@ -1,0 +1,168 @@
+---
+import { SITE } from '../data/site';
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <h1 class="hero__title">
+        فضای خانه یا محل کارتان را حرفه‌ای‌تر، زیباتر و کاربردی‌تر طراحی کنید
+      </h1>
+      <p class="hero__subtitle">
+        {SITE.name} از مشاوره و طراحی سهبعدی تا انتخاب متریال، ساخت کابینت و اجرای دکوراسیون در کنار شماست.
+      </p>
+      <div class="hero__actions">
+        <a href="/consultation/" class="btn btn--primary btn--lg">
+          شروع مشاوره طراحی
+        </a>
+        <a href="/portfolio/" class="btn btn--secondary btn--lg">
+          مشاهده نمونه‌کارها
+        </a>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__image-grid">
+        <div class="hero__image hero__image--main">
+          <div class="hero__placeholder" aria-hidden="true">
+            <span>تصویر اصلی آشپزخانه مدرن</span>
+          </div>
+        </div>
+        <div class="hero__image hero__image--small">
+          <div class="hero__placeholder" aria-hidden="true">
+            <span>تصویر نشیمن</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust Badges -->
+  <div class="hero__badges">
+    <div class="container">
+      <div class="hero__badges-grid">
+        <div class="hero__badge">
+          <span class="hero__badge-icon">🎨</span>
+          <span>طراحی سهبعدی قبل از اجرا</span>
+        </div>
+        <div class="hero__badge">
+          <span class="hero__badge-icon">💬</span>
+          <span>مشاوره تخصصی</span>
+        </div>
+        <div class="hero__badge">
+          <span class="hero__badge-icon">🔨</span>
+          <span>اجرای مرحله‌به‌مرحله</span>
+        </div>
+        <div class="hero__badge">
+          <span class="hero__badge-icon">🏠</span>
+          <span>مناسب خانه، آشپزخانه، دفتر و فضای تجاری</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: var(--space-12);
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .hero__title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-extrabold);
+    line-height: var(--leading-snug);
+    margin-bottom: var(--space-5);
+    max-width: 20ch;
+  }
+
+  @media (min-width: 768px) {
+    .hero__title {
+      font-size: var(--text-5xl);
+    }
+  }
+
+  .hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+    max-width: 45ch;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  /* Visual Grid */
+  .hero__image-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: var(--space-4);
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero__image--main {
+    grid-row: 1 / 3;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .hero__image--small {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .hero__placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 160px;
+    background: linear-gradient(135deg, var(--color-beige) 0%, var(--color-stone) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    color: var(--color-wood);
+  }
+
+  /* Trust Badges */
+  .hero__badges {
+    margin-top: var(--space-12);
+    padding-block: var(--space-8);
+    background: var(--color-bg-alt);
+  }
+
+  .hero__badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: var(--space-6);
+  }
+
+  .hero__badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-light);
+  }
+
+  .hero__badge-icon {
+    font-size: var(--text-2xl);
+    flex-shrink: 0;
+  }
+</style>

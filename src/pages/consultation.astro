@@ -1,0 +1,327 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+import { SERVICES } from '../data/services';
+
+const spaceTypes = [
+  'آشپزخانه',
+  'پذیرایی و نشیمن',
+  'اتاق خواب',
+  'دفتر کار',
+  'فضای تجاری',
+  'بازسازی کامل',
+  'سایر',
+];
+
+const budgetRanges = [
+  'زیر ۱۰۰ میلیون تومان',
+  '۱۰۰ تا ۳۰۰ میلیون تومان',
+  '۳۰۰ تا ۵۰۰ میلیون تومان',
+  'بالای ۵۰۰ میلیون تومان',
+  'هنوز مشخص نشده',
+];
+
+const styleOptions = [
+  'مدرن',
+  'نئوکلاسیک',
+  'کلاسیک',
+  'مینیمال',
+  'تلفیقی',
+  'هنوز تصمیم نگرفتم',
+];
+
+const timelineOptions = [
+  'فوری (کمتر از ۱ ماه)',
+  '۱ تا ۳ ماه',
+  '۳ تا ۶ ماه',
+  'بعد از ۶ ماه',
+  'هنوز مشخص نشده',
+];
+
+const cities = ['تهران', 'کرج', 'شهریار', 'اسلامشهر', 'سایر'];
+---
+
+<BaseLayout
+  title="مشاوره رایگان دکوراسیون | کاژه دکور"
+  description="فرم مشاوره رایگان طراحی و اجرای دکوراسیون داخلی. اطلاعات پروژه خود را ثبت کنید و پیشنهاد اولیه دریافت کنید."
+>
+  <section class="page-hero section section--alt">
+    <div class="container">
+      <h1>درخواست مشاوره رایگان</h1>
+      <p class="page-hero__subtitle">
+        اطلاعات پروژه خود را ثبت کنید. مشاوران {SITE.name} با شما تماس می‌گیرند یا پیشنهاد اولیه را از طریق واتساپ ارسال می‌کنند.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <form id="consultation-form" class="consultation-form" novalidate>
+        <div class="form-section">
+          <h2 class="form-section__title">اطلاعات پروژه</h2>
+
+          <div class="form-group">
+            <label for="service" class="form-label">نوع خدمت مورد نظر *</label>
+            <select id="service" name="service" class="form-select" required>
+              <option value="">انتخاب کنید</option>
+              {SERVICES.map((s) => <option value={s.title}>{s.title}</option>)}
+            </select>
+            <p class="form-error" id="service-error" role="alert" hidden></p>
+          </div>
+
+          <div class="form-group">
+            <label for="space-type" class="form-label">نوع فضا *</label>
+            <select id="space-type" name="spaceType" class="form-select" required>
+              <option value="">انتخاب کنید</option>
+              {spaceTypes.map((t) => <option value={t}>{t}</option>)}
+            </select>
+            <p class="form-error" id="space-type-error" role="alert" hidden></p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="area" class="form-label">متراژ تقریبی (متر مربع)</label>
+              <input type="text" id="area" name="area" class="form-input" placeholder="مثال: ۸۵" inputmode="numeric" dir="ltr" />
+            </div>
+            <div class="form-group">
+              <label for="city" class="form-label">شهر *</label>
+              <select id="city" name="city" class="form-select" required>
+                <option value="">انتخاب کنید</option>
+                {cities.map((c) => <option value={c}>{c}</option>)}
+              </select>
+              <p class="form-error" id="city-error" role="alert" hidden></p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="style" class="form-label">سبک مورد علاقه</label>
+              <select id="style" name="style" class="form-select">
+                <option value="">انتخاب کنید</option>
+                {styleOptions.map((s) => <option value={s}>{s}</option>)}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="budget" class="form-label">بودجه تقریبی</label>
+              <select id="budget" name="budget" class="form-select">
+                <option value="">انتخاب کنید</option>
+                {budgetRanges.map((b) => <option value={b}>{b}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="timeline" class="form-label">زمان‌بندی مورد نظر</label>
+            <select id="timeline" name="timeline" class="form-select">
+              <option value="">انتخاب کنید</option>
+              {timelineOptions.map((t) => <option value={t}>{t}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2 class="form-section__title">اطلاعات تماس</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name" class="form-label">نام و نام خانوادگی *</label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="مثال: علی محمدی" required />
+              <p class="form-error" id="name-error" role="alert" hidden></p>
+            </div>
+            <div class="form-group">
+              <label for="phone" class="form-label">شماره تماس / واتساپ *</label>
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="۰۹۱۲XXXXXXX" dir="ltr" required />
+              <p class="form-error" id="phone-error" role="alert" hidden></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description" class="form-label">توضیحات بیشتر (اختیاری)</label>
+            <textarea id="description" name="description" class="form-textarea" rows="4" placeholder="هر توضیحی که فکر می‌کنید مفید است بنویسید..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2 class="form-section__title">چگونه ارسال شود؟</h2>
+          <p class="form-hint" style="margin-bottom:var(--space-4);">
+            اطلاعات شما به صورت یک پیام آماده در واتساپ باز می‌شود. کافیست دکمه ارسال را بزنید.
+          </p>
+
+          <div id="form-success" class="form-success" hidden>
+            <span class="form-success__icon" aria-hidden="true">✅</span>
+            <h3>فرم آماده ارسال است!</h3>
+            <p>پیام شما آماده شد. لطفاً دکمه زیر را بزنید تا در واتساپ ارسال شود.</p>
+          </div>
+
+          <button type="submit" class="btn btn--whatsapp btn--lg btn--full" id="submit-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            ارسال از طریق واتساپ
+          </button>
+        </div>
+      </form>
+
+      <div class="consultation-alt">
+        <p>ترجیح می‌دهید مستقیم تماس بگیرید؟</p>
+        <div class="consultation-alt__actions">
+          <a href={SITE.phoneLink} class="btn btn--secondary">📞 تماس تلفنی</a>
+          <a href={SITE.social.whatsapp} class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer">💬 پیام مستقیم واتساپ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const form = document.getElementById('consultation-form');
+  const successBox = document.getElementById('form-success');
+
+  const requiredFields = ['service', 'space-type', 'city', 'name', 'phone'];
+
+  function showError(id, msg) {
+    const el = document.getElementById(id + '-error');
+    const input = document.getElementById(id);
+    if (el && input) {
+      el.textContent = msg;
+      el.hidden = false;
+      input.setAttribute('aria-invalid', 'true');
+      input.style.borderColor = 'var(--color-error)';
+    }
+  }
+
+  function clearError(id) {
+    const el = document.getElementById(id + '-error');
+    const input = document.getElementById(id);
+    if (el && input) {
+      el.hidden = true;
+      input.removeAttribute('aria-invalid');
+      input.style.borderColor = '';
+    }
+  }
+
+  requiredFields.forEach((id) => {
+    document.getElementById(id)?.addEventListener('change', () => clearError(id));
+    document.getElementById(id)?.addEventListener('input', () => clearError(id));
+  });
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    // Validate
+    requiredFields.forEach((id) => {
+      const val = document.getElementById(id)?.value?.trim();
+      if (!val) {
+        showError(id, 'این فیلد الزامی است');
+        valid = false;
+      }
+    });
+
+    if (!valid) return;
+
+    // Build message
+    const getVal = (id) => document.getElementById(id)?.value?.trim() || '';
+    const lines = ['🔔 *درخواست مشاوره از وبسایت کاژه دکور*'];
+    lines.push(`📍 منبع: فرم مشاوره`);
+    lines.push(`🛠 خدمت: ${getVal('service')}`);
+    lines.push(`🏠 نوع فضا: ${getVal('space-type')}`);
+    if (getVal('style')) lines.push(`🎨 سبک: ${getVal('style')}`);
+    if (getVal('area')) lines.push(`📐 متراژ: ${getVal('area')} متر`);
+    lines.push(`🏙 شهر: ${getVal('city')}`);
+    if (getVal('budget')) lines.push(`💰 بودجه: ${getVal('budget')}`);
+    if (getVal('timeline')) lines.push(`⏱ زمان‌بندی: ${getVal('timeline')}`);
+    lines.push(`👤 نام: ${getVal('name')}`);
+    lines.push(`📞 تلفن: ${getVal('phone')}`);
+    if (getVal('description')) lines.push(`📝 توضیحات: ${getVal('description')}`);
+
+    const text = encodeURIComponent(lines.join('\n'));
+    successBox.hidden = false;
+    successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    const submitBtn = document.getElementById('submit-btn');
+    if (submitBtn) {
+      submitBtn.textContent = 'باز کردن واتساپ و ارسال پیام';
+      submitBtn.onclick = () => {
+        window.open(`https://api.whatsapp.com/send?phone=989934202034&text=${text}`, '_blank');
+      };
+    }
+  });
+</script>
+
+<style>
+  .page-hero h1 { margin-bottom: var(--space-4); }
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  .consultation-form {
+    max-width: 100%;
+  }
+
+  .form-section {
+    margin-bottom: var(--space-10);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .form-section:last-child {
+    border-bottom: none;
+  }
+
+  .form-section__title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-6);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  @media (min-width: 600px) {
+    .form-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  .form-success {
+    background: #f0f9f4;
+    border: 1px solid var(--color-success);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    text-align: center;
+    margin-bottom: var(--space-6);
+  }
+  .form-success__icon {
+    font-size: var(--text-4xl);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+  .form-success h3 {
+    margin-bottom: var(--space-2);
+    color: var(--color-success);
+  }
+  .form-success p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-inline: auto;
+  }
+
+  .consultation-alt {
+    margin-top: var(--space-10);
+    padding: var(--space-6);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+  .consultation-alt p {
+    margin-bottom: var(--space-4);
+    color: var(--color-text-muted);
+  }
+  .consultation-alt__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+</style>

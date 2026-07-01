@@ -1,0 +1,55 @@
+---
+import { SITE } from '../data/site';
+---
+
+<section class="final-cta section section--dark">
+  <div class="container text-center">
+    <h2 class="final-cta__title">هنوز نمی‌دانید از کجا شروع کنید؟</h2>
+    <p class="final-cta__text">
+      چند عکس از فضای فعلی‌تان ارسال کنید تا مشاوران {SITE.name} مسیر مناسب طراحی، متریال و اجرای پروژه را پیشنهاد دهند.
+    </p>
+    <div class="final-cta__actions">
+      <a href="/consultation/" class="btn btn--primary btn--lg">
+        دریافت مشاوره رایگان
+      </a>
+      <a
+        href={SITE.social.whatsapp}
+        class="btn btn--whatsapp btn--lg"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ارسال پیام در واتساپ
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta__title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-5);
+    color: var(--color-gold);
+  }
+
+  @media (min-width: 768px) {
+    .final-cta__title {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .final-cta__text {
+    font-size: var(--text-lg);
+    color: var(--color-sand);
+    line-height: var(--leading-relaxed);
+    max-width: 55ch;
+    margin-inline: auto;
+    margin-bottom: var(--space-8);
+  }
+
+  .final-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+</style>

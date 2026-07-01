@@ -1,0 +1,217 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { BLOG_POSTS, getBlogPostBySlug } from '../../data/blog';
+import { SERVICES } from '../../data/services';
+
+export function getStaticPaths() {
+  return BLOG_POSTS.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const relatedServices = SERVICES.filter((s) => post.relatedServices.includes(s.slug));
+---
+
+<BaseLayout
+  title={post.metaTitle}
+  description={post.metaDesc}
+>
+  <script is:inline type="application/ld+json" slot="head">
+  {JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.excerpt,
+    "datePublished": post.date,
+    "author": { "@type": "Organization", "name": post.author }
+  })}
+  </script>
+
+  <article class="section">
+    <div class="container container--narrow">
+      <nav class="breadcrumb" aria-label="مسیر راهنما">
+        <ol>
+          <li><a href="/">خانه</a></li>
+          <li><a href="/blog/">مقالات</a></li>
+          <li aria-current="page">{post.title}</li>
+        </ol>
+      </nav>
+
+      {post.isDemo && <span class="badge" style="margin-bottom:var(--space-4);display:inline-block;">محتوای نمونه / دمو</span>}
+
+      <header class="post-header">
+        <div class="post-header__meta">
+          <span class="badge">{post.category}</span>
+          <span class="post-header__date">{post.date}</span>
+          <span class="post-header__time">⏱ {post.readingTime}</span>
+        </div>
+        <h1>{post.title}</h1>
+        <p class="post-header__excerpt">{post.excerpt}</p>
+        <div class="post-header__author">
+          <div class="post-header__avatar" aria-hidden="true">ک</div>
+          <span>{post.author}</span>
+        </div>
+      </header>
+
+      <div class="post-content" set:html={post.content} />
+
+      {relatedServices.length > 0 && (
+        <aside class="post-related">
+          <h2>خدمات مرتبط</h2>
+          <div class="post-related__grid">
+            {relatedServices.map((s) => (
+              <a href={`/services/${s.slug}/`} class="post-related__card">
+                <span aria-hidden="true">{s.icon}</span>
+                <span>{s.title}</span>
+              </a>
+            ))}
+          </div>
+        </aside>
+      )}
+
+      <aside class="post-cta">
+        <h2>نیاز به مشاوره دارید؟</h2>
+        <p>برای دریافت مشاوره رایگان و برآورد هزینه پروژه، با ما تماس بگیرید.</p>
+        <a href="/consultation/" class="btn btn--primary">دریافت مشاوره رایگان</a>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .breadcrumb ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    padding: 0;
+  }
+  .breadcrumb li:not(:last-child)::after { content: ' / '; margin-right: var(--space-2); }
+  .breadcrumb a { color: var(--color-accent); }
+
+  .post-header {
+    margin-bottom: var(--space-10);
+  }
+  .post-header__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .post-header__date,
+  .post-header__time {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+  .post-header h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+  }
+  .post-header__excerpt {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    max-width: 60ch;
+  }
+  .post-header__author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+  }
+  .post-header__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--weight-bold);
+  }
+
+  .post-content {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-12);
+  }
+  .post-content :global(h2) {
+    font-size: var(--text-2xl);
+    margin-top: var(--space-10);
+    margin-bottom: var(--space-4);
+  }
+  .post-content :global(p) {
+    margin-bottom: var(--space-4);
+    color: var(--color-text-light);
+  }
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: var(--space-4);
+    padding-right: var(--space-6);
+  }
+  .post-content :global(li) {
+    margin-bottom: var(--space-2);
+    color: var(--color-text-light);
+  }
+  .post-content :global(strong) {
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+  }
+
+  .post-related {
+    margin-bottom: var(--space-10);
+    padding: var(--space-6);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+  }
+  .post-related h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+  }
+  .post-related__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .post-related__card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-bg-card);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+    border: 1px solid var(--color-border-light);
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+  .post-related__card:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .post-cta {
+    text-align: center;
+    padding: var(--space-10);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+  }
+  .post-cta h2 {
+    margin-bottom: var(--space-3);
+  }
+  .post-cta p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    max-width: 50ch;
+    margin-inline: auto;
+  }
+</style>

@@ -1,0 +1,115 @@
+---
+const steps = [
+  {
+    num: '۱',
+    icon: '📋',
+    title: 'ثبت درخواست و مشاوره اولیه',
+    desc: 'درخواست خود را ثبت کنید. مشاوران ما با شما تماس می‌گیرند و نیازهایتان را بررسی می‌کنند.',
+  },
+  {
+    num: '۲',
+    icon: '🔍',
+    title: 'بررسی فضا، نیازها و بودجه',
+    desc: 'بازدید از فضا، اندازه‌گیری دقیق و شناخت سلیقه و بودجه شما برای ارائه بهترین پیشنهاد.',
+  },
+  {
+    num: '۳',
+    icon: '🎨',
+    title: 'طراحی سهبعدی، چیدمان و انتخاب متریال',
+    desc: 'طراحی سهبعدی واقع‌گرایانه از فضای آینده‌تان. پالت رنگ و متریال را انتخاب می‌کنید.',
+  },
+  {
+    num: '۴',
+    icon: '🔨',
+    title: 'اجرا، نظارت و تحویل نهایی',
+    desc: 'اجرای مرحله‌به‌مرحله با نظارت مستمر. پس از تأیید کیفیت، فضا تحویل شما می‌شود.',
+  },
+];
+---
+
+<section class="process section section--alt" id="process">
+  <div class="container">
+    <div class="section__header">
+      <h2>روند همکاری با کاژه دکور</h2>
+      <p class="section__subtitle">از مشاوره اولیه تا تحویل نهایی، هر مرحله شفاف و قابل پیگیری است.</p>
+    </div>
+
+    <div class="process__timeline">
+      {steps.map((step, i) => (
+        <div class="process__step fade-in" style={`animation-delay: ${i * 100}ms`}>
+          <div class="process__step-header">
+            <span class="process__num" aria-hidden="true">{step.num}</span>
+            <span class="process__icon" aria-hidden="true">{step.icon}</span>
+          </div>
+          <h3 class="process__title">{step.title}</h3>
+          <p class="process__desc">{step.desc}</p>
+          {i < steps.length - 1 && (
+            <div class="process__connector hide-mobile" aria-hidden="true"></div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .process__timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: var(--space-8);
+  }
+
+  .process__step {
+    position: relative;
+    text-align: center;
+    padding: var(--space-6);
+  }
+
+  .process__step-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .process__num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--color-accent);
+    color: #fff;
+    font-weight: var(--weight-bold);
+    font-size: var(--text-lg);
+    border-radius: 50%;
+  }
+
+  .process__icon {
+    font-size: var(--text-3xl);
+  }
+
+  .process__title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    margin-bottom: var(--space-3);
+  }
+
+  .process__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: 30ch;
+    margin-inline: auto;
+  }
+
+  .process__connector {
+    position: absolute;
+    top: 50%;
+    left: -4%;
+    width: 8%;
+    height: 2px;
+    background: var(--color-stone);
+  }
+</style>

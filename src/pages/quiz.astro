@@ -1,0 +1,422 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="کوییز سبک طراحی | کاژه دکور"
+  description="با چند سؤال ساده، سبک طراحی مورد علاقه خود را بشناسید و پیشنهاد اولیه از کاژه دکور دریافت کنید."
+>
+  <section class="page-hero section section--alt">
+    <div class="container">
+      <h1>کوییز سبک طراحی شما</h1>
+      <p class="page-hero__subtitle">
+        در چند مرحله ساده، سبک و نیازهای پروژه خود را مشخص کنید تا پیشنهاد اولیه دریافت کنید.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="quiz" id="quiz">
+        <!-- Progress -->
+        <div class="quiz__progress" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6">
+          <div class="quiz__progress-bar" id="quiz-progress-bar" style="width: 16.6%"></div>
+          <span class="quiz__progress-text" id="quiz-progress-text">مرحله ۱ از ۶</span>
+        </div>
+
+        <!-- Step 1: Space Type -->
+        <div class="quiz__step quiz__step--active" data-step="1">
+          <h2 class="quiz__question">فضای مورد نظر شما کدام است؟</h2>
+          <div class="quiz__options" role="radiogroup">
+            <button class="quiz__option" data-value="آشپزخانه" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">🍳</span>
+              <span class="quiz__option-label">آشپزخانه و کابینت</span>
+            </button>
+            <button class="quiz__option" data-value="پذیرایی" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">🛋</span>
+              <span class="quiz__option-label">پذیرایی و نشیمن</span>
+            </button>
+            <button class="quiz__option" data-value="اتاق خواب" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">🛏</span>
+              <span class="quiz__option-label">اتاق خواب</span>
+            </button>
+            <button class="quiz__option" data-value="دفتر کار" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">💼</span>
+              <span class="quiz__option-label">دفتر کار</span>
+            </button>
+            <button class="quiz__option" data-value="فضای تجاری" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">🏪</span>
+              <span class="quiz__option-label">فضای تجاری</span>
+            </button>
+            <button class="quiz__option" data-value="بازسازی کامل" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">🔨</span>
+              <span class="quiz__option-label">بازسازی کامل</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Style -->
+        <div class="quiz__step" data-step="2">
+          <h2 class="quiz__question">کدام سبک بیشتر به دلتان می‌نشیند؟</h2>
+          <div class="quiz__options" role="radiogroup">
+            <button class="quiz__option" data-value="مدرن" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">◼</span>
+              <span class="quiz__option-label">مدرن</span>
+              <span class="quiz__option-desc">خطوط تمیز، رنگ‌های خنثی، سادگی</span>
+            </button>
+            <button class="quiz__option" data-value="نئوکلاسیک" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">🏛</span>
+              <span class="quiz__option-label">نئوکلاسیک</span>
+              <span class="quiz__option-desc">ظرافت کلاسیک با سادگی مدرن</span>
+            </button>
+            <button class="quiz__option" data-value="کلاسیک" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">✨</span>
+              <span class="quiz__option-label">کلاسیک</span>
+              <span class="quiz__option-desc">جزئیات زیاد، تجملی، رسمی</span>
+            </button>
+            <button class="quiz__option" data-value="مینیمال" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">◻</span>
+              <span class="quiz__option-label">مینیمال</span>
+              <span class="quiz__option-desc">حداقل عناصر، حداکثر تأثیر</span>
+            </button>
+            <button class="quiz__option" data-value="تلفیقی" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">🔀</span>
+              <span class="quiz__option-label">تلفیقی</span>
+              <span class="quiz__option-desc">ترکیب سبک‌ها متناسب با سلیقه شما</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Goal -->
+        <div class="quiz__step" data-step="3">
+          <h2 class="quiz__question">هدف اصلی شما از این پروژه چیست؟</h2>
+          <div class="quiz__options" role="radiogroup">
+            <button class="quiz__option" data-value="زیباتر کردن فضا" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">🎨</span>
+              <span class="quiz__option-label">زیباتر کردن فضا</span>
+            </button>
+            <button class="quiz__option" data-value="بهینه‌سازی فضا" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">📐</span>
+              <span class="quiz__option-label">بهینه‌سازی و کاربردی‌تر کردن</span>
+            </button>
+            <button class="quiz__option" data-value="نوسازی کامل" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">🔨</span>
+              <span class="quiz__option-label">نوسازی و بازسازی کامل</span>
+            </button>
+            <button class="quiz__option" data-value="طراحی از صفر" role="radio" aria-checked="false">
+              <span class="quiz__option-icon">🏗</span>
+              <span class="quiz__option-label">طراحی از صفر (خانه جدید)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 4: City + Area -->
+        <div class="quiz__step" data-step="4">
+          <h2 class="quiz__question">شهر و متراژ فضای شما؟</h2>
+          <div class="quiz__form">
+            <div class="form-group">
+              <label for="quiz-city" class="form-label">شهر *</label>
+              <select id="quiz-city" class="form-select">
+                <option value="">انتخاب کنید</option>
+                <option value="تهران">تهران</option>
+                <option value="کرج">کرج</option>
+                <option value="شهریار">شهریار</option>
+                <option value="اسلامشهر">اسلامشهر</option>
+                <option value="سایر">سایر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="quiz-area" class="form-label">متراژ تقریبی (متر مربع)</label>
+              <input type="text" id="quiz-area" class="form-input" placeholder="مثال: ۸۵" inputmode="numeric" dir="ltr" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Budget -->
+        <div class="quiz__step" data-step="5">
+          <h2 class="quiz__question">بودجه تقریبی شما چقدر است؟</h2>
+          <div class="quiz__options" role="radiogroup">
+            <button class="quiz__option" data-value="زیر ۱۰۰ میلیون" role="radio" aria-checked="false">
+              <span class="quiz__option-label">زیر ۱۰۰ میلیون تومان</span>
+            </button>
+            <button class="quiz__option" data-value="۱۰۰ تا ۳۰۰ میلیون" role="radio" aria-checked="false">
+              <span class="quiz__option-label">۱۰۰ تا ۳۰۰ میلیون تومان</span>
+            </button>
+            <button class="quiz__option" data-value="۳۰۰ تا ۵۰۰ میلیون" role="radio" aria-checked="false">
+              <span class="quiz__option-label">۳۰۰ تا ۵۰۰ میلیون تومان</span>
+            </button>
+            <button class="quiz__option" data-value="بالای ۵۰۰ میلیون" role="radio" aria-checked="false">
+              <span class="quiz__option-label">بالای ۵۰۰ میلیون تومان</span>
+            </button>
+            <button class="quiz__option" data-value="هنوز مشخص نشده" role="radio" aria-checked="false">
+              <span class="quiz__option-label">هنوز مشخص نشده</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 6: Contact -->
+        <div class="quiz__step" data-step="6">
+          <h2 class="quiz__question">اطلاعات تماس شما</h2>
+          <div class="quiz__form">
+            <div class="form-group">
+              <label for="quiz-name" class="form-label">نام شما *</label>
+              <input type="text" id="quiz-name" class="form-input" placeholder="مثال: علی محمدی" />
+            </div>
+            <div class="form-group">
+              <label for="quiz-phone" class="form-label">شماره واتساپ *</label>
+              <input type="tel" id="quiz-phone" class="form-input" placeholder="۰۹۱۲XXXXXXX" dir="ltr" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="quiz__nav">
+          <button class="btn btn--ghost" id="quiz-prev" disabled>مرحله قبل</button>
+          <button class="btn btn--primary" id="quiz-next">مرحله بعد</button>
+        </div>
+
+        <!-- Result -->
+        <div class="quiz__result" id="quiz-result" hidden>
+          <div class="quiz__result-icon" aria-hidden="true">✅</div>
+          <h2>نتیجه quiz شما آماده است!</h2>
+          <p id="quiz-result-summary"></p>
+          <a id="quiz-whatsapp-link" href="#" class="btn btn--whatsapp btn--lg btn--full" target="_blank" rel="noopener noreferrer">
+            ارسال نتیجه در واتساپ
+          </a>
+          <p class="quiz__result-hint text-muted">مشاوران ما نتیجه quiz شما را بررسی می‌کنند و پیشنهاد اولیه را ارسال می‌کنند.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const quiz = document.getElementById('quiz');
+  let currentStep = 1;
+  const totalSteps = 6;
+  const answers = {};
+
+  function showStep(step) {
+    quiz.querySelectorAll('.quiz__step').forEach((s) => {
+      s.classList.toggle('quiz__step--active', parseInt(s.dataset.step) === step);
+    });
+    const prev = document.getElementById('quiz-prev');
+    const next = document.getElementById('quiz-next');
+    prev.disabled = step === 1;
+    next.textContent = step === totalSteps ? 'ارسال و دریافت نتیجه' : 'مرحله بعد';
+
+    const pct = (step / totalSteps) * 100;
+    document.getElementById('quiz-progress-bar').style.width = pct + '%';
+    document.getElementById('quiz-progress-text').textContent = `مرحله ${step} از ${totalSteps}`;
+    quiz.querySelector('.quiz__progress').setAttribute('aria-valuenow', step);
+  }
+
+  // Option selection
+  quiz.querySelectorAll('.quiz__option').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const parent = btn.closest('.quiz__options');
+      parent.querySelectorAll('.quiz__option').forEach((b) => {
+        b.classList.remove('quiz__option--selected');
+        b.setAttribute('aria-checked', 'false');
+      });
+      btn.classList.add('quiz__option--selected');
+      btn.setAttribute('aria-checked', 'true');
+    });
+  });
+
+  document.getElementById('quiz-next')?.addEventListener('click', () => {
+    // Collect current step data
+    const stepEl = quiz.querySelector(`.quiz__step[data-step="${currentStep}"]`);
+    const selected = stepEl.querySelector('.quiz__option--selected');
+
+    if (currentStep <= 3 || currentStep === 5) {
+      if (!selected) {
+        alert('لطفاً یک گزینه را انتخاب کنید.');
+        return;
+      }
+      answers[`step${currentStep}`] = selected.dataset.value;
+    } else if (currentStep === 4) {
+      answers.city = document.getElementById('quiz-city')?.value || '';
+      answers.area = document.getElementById('quiz-area')?.value || '';
+      if (!answers.city) {
+        alert('لطفاً شهر را انتخاب کنید.');
+        return;
+      }
+    } else if (currentStep === 6) {
+      answers.name = document.getElementById('quiz-name')?.value?.trim() || '';
+      answers.phone = document.getElementById('quiz-phone')?.value?.trim() || '';
+      if (!answers.name || !answers.phone) {
+        alert('لطفاً نام و شماره واتساپ را وارد کنید.');
+        return;
+      }
+    }
+
+    if (currentStep < totalSteps) {
+      currentStep++;
+      showStep(currentStep);
+    } else {
+      // Build result
+      const lines = ['🎯 *نتیجه quiz کاژه دکور*'];
+      lines.push(`🏠 فضا: ${answers.step1 || ''}`);
+      lines.push(`🎨 سبک: ${answers.step2 || ''}`);
+      lines.push(`🎯 هدف: ${answers.step3 || ''}`);
+      if (answers.city) lines.push(`🏙 شهر: ${answers.city}`);
+      if (answers.area) lines.push(`📐 متراژ: ${answers.area} متر`);
+      lines.push(`💰 بودجه: ${answers.step5 || ''}`);
+      lines.push(`👤 نام: ${answers.name}`);
+      lines.push(`📞 تلفن: ${answers.phone}`);
+
+      const text = encodeURIComponent(lines.join('\n'));
+      const url = `https://api.whatsapp.com/send?phone=989934202034&text=${text}`;
+
+      document.getElementById('quiz-whatsapp-link').href = url;
+      document.getElementById('quiz-result-summary').textContent =
+        `فضای ${answers.step1} با سبک ${answers.step2} در ${answers.city || 'شهر شما'} با بودجه ${answers.step5}`;
+
+      quiz.querySelector('.quiz__nav').hidden = true;
+      quiz.querySelectorAll('.quiz__step').forEach((s) => s.classList.remove('quiz__step--active'));
+      quiz.querySelector('.quiz__progress').hidden = true;
+      document.getElementById('quiz-result').hidden = false;
+    }
+  });
+
+  document.getElementById('quiz-prev')?.addEventListener('click', () => {
+    if (currentStep > 1) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  });
+
+  // Pre-fill from URL params
+  const params = new URLSearchParams(window.location.search);
+  const spaceParam = params.get('space');
+  if (spaceParam) {
+    const match = quiz.querySelector(`.quiz__step[data-step="1"] .quiz__option[data-value*="${spaceParam}"]`);
+    if (match) {
+      match.click();
+      currentStep = 2;
+      showStep(2);
+    }
+  }
+</script>
+
+<style>
+  .page-hero h1 { margin-bottom: var(--space-4); }
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  .quiz__progress {
+    position: relative;
+    height: 8px;
+    background: var(--color-beige);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-10);
+    overflow: hidden;
+  }
+  .quiz__progress-bar {
+    height: 100%;
+    background: var(--color-accent);
+    border-radius: var(--radius-full);
+    transition: width var(--duration-slow) var(--ease-out);
+  }
+  .quiz__progress-text {
+    display: block;
+    text-align: center;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-top: var(--space-2);
+  }
+
+  .quiz__step { display: none; }
+  .quiz__step--active { display: block; }
+
+  .quiz__question {
+    font-size: var(--text-2xl);
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  .quiz__options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
+    gap: var(--space-4);
+  }
+
+  .quiz__option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-6) var(--space-4);
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all var(--duration-normal) var(--ease-out);
+    text-align: center;
+  }
+  .quiz__option:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .quiz__option--selected {
+    border-color: var(--color-accent);
+    background: var(--color-warm-white);
+    box-shadow: 0 0 0 3px rgba(184, 149, 106, 0.2);
+  }
+  .quiz__option-icon {
+    font-size: var(--text-4xl);
+  }
+  .quiz__option-label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+  }
+  .quiz__option-desc {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .quiz__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .quiz__nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-10);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .quiz__result {
+    text-align: center;
+    padding: var(--space-10) 0;
+  }
+  .quiz__result-icon {
+    font-size: var(--text-5xl);
+    display: block;
+    margin-bottom: var(--space-4);
+  }
+  .quiz__result h2 {
+    margin-bottom: var(--space-4);
+  }
+  .quiz__result p {
+    max-width: 50ch;
+    margin-inline: auto;
+    margin-bottom: var(--space-6);
+  }
+  .quiz__result-hint {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+  }
+</style>

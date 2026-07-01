@@ -1,0 +1,252 @@
+---
+import { SITE, NAV_ITEMS } from '../data/site';
+---
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="/" class="header__logo" aria-label="خانه - {SITE.name}">
+      <span class="header__logo-icon">✦</span>
+      <span class="header__logo-text">{SITE.name}</span>
+    </a>
+
+    <nav class="header__nav hide-mobile" aria-label="منوی اصلی">
+      <ul class="header__nav-list">
+        {NAV_ITEMS.map((item) => (
+          <li>
+            <a href={item.href} class="header__nav-link">{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a href="/consultation/" class="btn btn--primary btn--sm hide-mobile">
+        دریافت مشاوره رایگان
+      </a>
+      <a
+        href={SITE.social.whatsapp}
+        class="btn btn--whatsapp btn--sm hide-mobile"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        واتساپ
+      </a>
+      <button
+        class="header__menu-btn hide-desktop"
+        aria-label="باز کردن منو"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        id="menu-toggle"
+      >
+        <span class="header__menu-icon"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <nav aria-label="منوی موبایل">
+      <ul class="mobile-nav__list">
+        {NAV_ITEMS.map((item) => (
+          <li>
+            <a href={item.href} class="mobile-nav__link">{item.label}</a>
+          </li>
+        ))}
+      </ul>
+      <div class="mobile-nav__actions">
+        <a href="/consultation/" class="btn btn--primary btn--full">
+          دریافت مشاوره رایگان
+        </a>
+        <a
+          href={SITE.social.whatsapp}
+          class="btn btn--whatsapp btn--full"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ارسال پیام در واتساپ
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: rgba(253, 251, 248, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: var(--space-4);
+  }
+
+  .header__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: var(--color-charcoal);
+    flex-shrink: 0;
+  }
+
+  .header__logo-icon {
+    font-size: var(--text-2xl);
+    color: var(--color-accent);
+  }
+
+  .header__logo-text {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.01em;
+  }
+
+  .header__nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    list-style: none;
+  }
+
+  .header__nav-link {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-light);
+    border-radius: var(--radius-md);
+    transition: color var(--duration-fast) var(--ease-out),
+                background var(--duration-fast) var(--ease-out);
+  }
+
+  .header__nav-link:hover {
+    color: var(--color-accent);
+    background: var(--color-beige);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .header__menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: background var(--duration-fast) var(--ease-out);
+  }
+
+  .header__menu-btn:hover {
+    background: var(--color-beige);
+  }
+
+  .header__menu-icon,
+  .header__menu-icon::before,
+  .header__menu-icon::after {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-charcoal);
+    border-radius: 2px;
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+
+  .header__menu-icon {
+    position: relative;
+  }
+
+  .header__menu-icon::before,
+  .header__menu-icon::after {
+    content: '';
+    position: absolute;
+    right: 0;
+  }
+
+  .header__menu-icon::before { top: -7px; }
+  .header__menu-icon::after { top: 7px; }
+
+  .header__menu-btn[aria-expanded="true"] .header__menu-icon {
+    background: transparent;
+  }
+
+  .header__menu-btn[aria-expanded="true"] .header__menu-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .header__menu-btn[aria-expanded="true"] .header__menu-icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 72px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: var(--color-bg);
+    z-index: var(--z-mobile-nav);
+    padding: var(--space-6);
+    overflow-y: auto;
+  }
+
+  .mobile-nav[aria-hidden="false"] {
+    display: block;
+  }
+
+  .mobile-nav__list {
+    list-style: none;
+    margin-bottom: var(--space-8);
+  }
+
+  .mobile-nav__link {
+    display: block;
+    padding: var(--space-4) 0;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .mobile-nav__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+</style>
+
+<script is:inline>
+  const toggle = document.getElementById('menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    mobileNav?.setAttribute('aria-hidden', String(expanded));
+    document.body.style.overflow = expanded ? '' : 'hidden';
+  });
+
+  // Close on nav link click
+  mobileNav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      toggle?.setAttribute('aria-expanded', 'false');
+      mobileNav?.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+</script>

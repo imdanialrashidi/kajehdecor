@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="تماس با کاژه دکور | مشاوره رایگان دکوراسیون داخلی"
+  description="تماس با کاژه دکور: مشاوره رایگان طراحی و اجرای دکوراسیون داخلی از طریق تلفن، واتساپ، اینستاگرام و تلگرام."
+>
+  <section class="page-hero section section--alt">
+    <div class="container">
+      <h1>تماس با کاژه دکور</h1>
+      <p class="page-hero__subtitle">
+        برای مشاوره رایگان، برآورد هزینه یا هر سؤالی، از یکی از راه‌های زیر با ما در ارتباط باشید.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-channels">
+          <h2>راه‌های ارتباطی</h2>
+
+          <div class="contact-card">
+            <span class="contact-card__icon" aria-hidden="true">📞</span>
+            <div>
+              <h3>تماس تلفنی</h3>
+              <a href={SITE.phoneLink}>{SITE.phone}</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <span class="contact-card__icon" aria-hidden="true">💬</span>
+            <div>
+              <h3>واتساپ</h3>
+              <a href={SITE.social.whatsapp} target="_blank" rel="noopener noreferrer">ارسال پیام در واتساپ</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <span class="contact-card__icon" aria-hidden="true">📸</span>
+            <div>
+              <h3>اینستاگرام</h3>
+              <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer">@kajehdecor</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <span class="contact-card__icon" aria-hidden="true">✈</span>
+            <div>
+              <h3>تلگرام</h3>
+              <a href={SITE.social.telegram} target="_blank" rel="noopener noreferrer">@Kajehdecor</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <span class="contact-card__icon" aria-hidden="true">📍</span>
+            <div>
+              <h3>آدرس</h3>
+              <p>{SITE.address}</p>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <span class="contact-card__icon" aria-hidden="true">🕐</span>
+            <div>
+              <h3>ساعات کاری</h3>
+              <p>شنبه تا پنجشنبه، ۹ صبح تا ۸ شب</p>
+              <p class="text-muted" style="font-size:var(--text-xs);">*مشاوره واتساپ: ۲۴ ساعته</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-section">
+          <h2>پیام سریع در واتساپ</h2>
+          <p>فرم زیر را پر کنید تا پیام آماده در واتساپ برای ما ارسال شود.</p>
+
+          <form id="contact-whatsapp-form" class="contact-form">
+            <div class="form-group">
+              <label for="contact-name" class="form-label">نام شما</label>
+              <input type="text" id="contact-name" class="form-input" placeholder="مثال: علی محمدی" />
+            </div>
+
+            <div class="form-group">
+              <label for="contact-phone" class="form-label">شماره تماس</label>
+              <input type="tel" id="contact-phone" class="form-input" placeholder="۰۹۱۲XXXXXXX" dir="ltr" />
+            </div>
+
+            <div class="form-group">
+              <label for="contact-subject" class="form-label">موضوع</label>
+              <select id="contact-subject" class="form-select">
+                <option value="">انتخاب کنید</option>
+                <option value="مشاوره طراحی داخلی">مشاوره طراحی داخلی</option>
+                <option value="طراحی آشپزخانه و کابینت">طراحی آشپزخانه و کابینت</option>
+                <option value="بازسازی">بازسازی</option>
+                <option value="طراحی اداری و تجاری">طراحی اداری و تجاری</option>
+                <option value="سؤال عمومی">سؤال عمومی</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message" class="form-label">پیام شما</label>
+              <textarea id="contact-message" class="form-textarea" rows="4" placeholder="توضیحات خود را بنویسید..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--whatsapp btn--lg btn--full">
+              ارسال پیام در واتساپ
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="map-placeholder">
+        <div class="map-placeholder__inner">
+          <span aria-hidden="true">📍</span>
+          <p>{SITE.address}</p>
+          <p class="text-muted" style="font-size:var(--text-xs);">نقشه تعاملی پس از اتصال دامنه قابل اضافه شدن است.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  document.getElementById('contact-whatsapp-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('contact-name').value.trim();
+    const phone = document.getElementById('contact-phone').value.trim();
+    const subject = document.getElementById('contact-subject').value;
+    const message = document.getElementById('contact-message').value.trim();
+
+    const lines = ['💬 *پیام از وبسایت کاژه دکور*'];
+    if (subject) lines.push(`📋 موضوع: ${subject}`);
+    if (name) lines.push(`👤 نام: ${name}`);
+    if (phone) lines.push(`📞 تلفن: ${phone}`);
+    if (message) lines.push(`📝 پیام: ${message}`);
+
+    const text = encodeURIComponent(lines.join('\n'));
+    window.open(`https://api.whatsapp.com/send?phone=${'989934202034'}&text=${text}`, '_blank');
+  });
+</script>
+
+<style>
+  .page-hero h1 { margin-bottom: var(--space-4); }
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    margin-bottom: var(--space-12);
+  }
+  @media (min-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .contact-channels h2 {
+    margin-bottom: var(--space-6);
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .contact-card__icon {
+    font-size: var(--text-2xl);
+    flex-shrink: 0;
+    margin-top: var(--space-1);
+  }
+  .contact-card h3 {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-1);
+  }
+  .contact-card a {
+    font-size: var(--text-sm);
+  }
+  .contact-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  .contact-form-section h2 {
+    margin-bottom: var(--space-3);
+  }
+  .contact-form-section > p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+  }
+
+  .map-placeholder {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+    padding: var(--space-12);
+    text-align: center;
+  }
+  .map-placeholder__inner span {
+    font-size: var(--text-5xl);
+    display: block;
+    margin-bottom: var(--space-3);
+  }
+  .map-placeholder__inner p {
+    margin-bottom: var(--space-1);
+  }
+</style>

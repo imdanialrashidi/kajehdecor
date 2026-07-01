@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { BLOG_POSTS } from '../../data/blog';
+---
+
+<BaseLayout
+  title="مقالات و راهنماها | کاژه دکور"
+  description="مقالات آموزشی کاژه دکور: راهنمای انتخاب کابینت، ایده‌های آشپزخانه مدرن، اشتباهات بازسازی و تفاوت سبک‌های دکوراسیون."
+>
+  <section class="page-hero section section--alt">
+    <div class="container">
+      <h1>مقالات و راهنماها</h1>
+      <p class="page-hero__subtitle">
+        نکات کاربردی، ایده‌ها و راهنماهای تخصصی برای تصمیم‌گیری بهتر در طراحی و اجرای دکوراسیون داخلی.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="blog-grid">
+        {BLOG_POSTS.map((post) => (
+          <article class="blog-card card">
+            <div class="card__image">
+              <div class="blog-card__placeholder" aria-hidden="true">
+                <span>تصویر مقاله</span>
+              </div>
+            </div>
+            <div class="card__body">
+              <div class="blog-card__meta">
+                <span class="badge">{post.category}</span>
+                <span class="blog-card__date">{post.date}</span>
+                <span class="blog-card__time">⏱ {post.readingTime}</span>
+              </div>
+              <h2 class="blog-card__title">
+                <a href={`/blog/${post.slug}/`}>{post.title}</a>
+              </h2>
+              <p class="blog-card__excerpt">{post.excerpt}</p>
+              <a href={`/blog/${post.slug}/`} class="btn btn--ghost btn--sm">خواندن مقاله ←</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero h1 { margin-bottom: var(--space-4); }
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: var(--space-6);
+  }
+
+  .blog-card__placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+    background: linear-gradient(135deg, var(--color-beige), var(--color-stone));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    color: var(--color-wood);
+  }
+
+  .blog-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .blog-card__date,
+  .blog-card__time {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .blog-card__title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+  }
+  .blog-card__title a { color: var(--color-text); }
+  .blog-card__title a:hover { color: var(--color-accent); }
+
+  .blog-card__excerpt {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+  }
+</style>

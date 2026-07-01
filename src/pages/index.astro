@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SpaceSelector from '../components/SpaceSelector.astro';
+import Process from '../components/Process.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import PortfolioPreview from '../components/PortfolioPreview.astro';
+import ValueProps from '../components/ValueProps.astro';
+import Packages from '../components/Packages.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
+import BlogPreview from '../components/BlogPreview.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="کاژه دکور | طراحی و اجرای دکوراسیون داخلی، آشپزخانه و بازسازی"
+  description={SITE.description}
+>
+  <script is:inline type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "کاژه دکور",
+    "alternateName": "Kajeh Decor",
+    "description": "طراحی و اجرای دکوراسیون داخلی، آشپزخانه، کابینت و بازسازی با طراحی سهبعدی",
+    "url": "https://kajehdecor.com",
+    "telephone": "+989934202034",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "بزرگراه جناح، خیابان طاهریان، پلاک ۳",
+      "addressLocality": "تهران",
+      "addressCountry": "IR"
+    },
+    "areaServed": ["تهران", "کرج", "استان البرز"],
+    "priceRange": "$$"
+  }
+  </script>
+
+  <Hero />
+  <SpaceSelector />
+  <Process />
+  <ServicesSection />
+  <PortfolioPreview />
+  <ValueProps />
+  <Packages />
+  <TestimonialsSection />
+  <BlogPreview />
+  <FinalCTA />
+</BaseLayout>

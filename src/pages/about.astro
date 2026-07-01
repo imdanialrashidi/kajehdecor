@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="درباره کاژه دکور | تیم طراحی و اجرای دکوراسیون داخلی"
+  description="آشنایی با کاژه دکور: تیم متخصص طراحی و اجرای دکوراسیون داخلی، آشپزخانه و بازسازی در تهران و کرج."
+>
+  <section class="page-hero section section--alt">
+    <div class="container">
+      <h1>درباره کاژه دکور</h1>
+      <p class="page-hero__subtitle">
+        ما تیمی از طراحان و مجریان متخصص دکوراسیون داخلی هستیم که باور داریم هر فضایی می‌تواند زیباتر، کاربردی‌تر و الهام‌بخش‌تر باشد.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="about-story">
+        <h2>داستان ما</h2>
+        <p>
+          {SITE.name} با هدف ارائه خدمات حرفه‌ای طراحی و اجرای دکوراسیون داخلی شکل گرفت. ما معتقدیم که قبل از هر تصمیم اجرایی، باید طرح سهبعدی واقع‌گرایانه از فضای آینده دیده شود تا مشتری با اطمینان و خیال راحت تصمیم بگیرد.
+        </p>
+        <p>
+          تیم ما از مشاوره اولیه تا تحویل نهایی در کنار شماست. هر پروژه با شناخت دقیق نیازها، سلیقه و بودجه مشتری شروع می‌شود و با اجرای مرحله‌به‌مرحله و نظارت مستمر به نتیجه می‌رسد.
+        </p>
+      </div>
+
+      <div class="about-values">
+        <h2>ارزش‌های ما</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <span class="value-card__icon" aria-hidden="true">🎨</span>
+            <h3>طراحی قبل از اجرا</h3>
+            <p>هر پروژه با طراحی سهبعدی واقع‌گرایانه شروع می‌شود تا قبل از صرف هزینه، نتیجه نهایی را ببینید.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-card__icon" aria-hidden="true">🤝</span>
+            <h3>صداقت و شفافیت</h3>
+            <p>از بودجه‌بندی تا زمان‌بندی، همه چیز شفاف و قابل پیگیری است. بدون هزینه‌های پنهان.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-card__icon" aria-hidden="true">✨</span>
+            <h3>کیفیت اجرا</h3>
+            <p>از انتخاب متریال تا آخرین جزئیات اجرا، کیفیت اولویت اول ماست.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-card__icon" aria-hidden="true">💬</span>
+            <h3>ارتباط مستمر</h3>
+            <p>در تمام مراحل پروژه، ارتباط مستقیم و سریع با تیم طراحی و اجرا خواهید داشت.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-areas">
+        <h2>مناطق تحت پوشش</h2>
+        <div class="areas-list">
+          {SITE.serviceAreas.map((area) => (
+            <div class="area-chip">{area}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark text-center">
+    <div class="container">
+      <h2 style="color:var(--color-gold);margin-bottom:var(--space-4);">آماده شروع پروژه هستید؟</h2>
+      <p style="color:var(--color-sand);max-width:50ch;margin-inline:auto;margin-bottom:var(--space-6);">
+        همین الان مشاوره رایگان دریافت کنید.
+      </p>
+      <a href="/consultation/" class="btn btn--primary btn--lg">دریافت مشاوره رایگان</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero h1 { margin-bottom: var(--space-4); }
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  .about-story {
+    margin-bottom: var(--space-12);
+  }
+  .about-story h2 {
+    margin-bottom: var(--space-4);
+  }
+  .about-story p {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-light);
+    margin-bottom: var(--space-4);
+  }
+
+  .about-values {
+    margin-bottom: var(--space-12);
+  }
+  .about-values h2 {
+    margin-bottom: var(--space-6);
+  }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: var(--space-6);
+  }
+  .value-card {
+    text-align: center;
+    padding: var(--space-6);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+  }
+  .value-card__icon {
+    font-size: var(--text-4xl);
+    display: block;
+    margin-bottom: var(--space-3);
+  }
+  .value-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2);
+  }
+  .value-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .about-areas h2 {
+    margin-bottom: var(--space-4);
+  }
+  .areas-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .area-chip {
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-full);
+    font-weight: var(--weight-medium);
+  }
+</style>
